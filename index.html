@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Glorious Ejobe 💘</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff2a6d;
+            --secondary: #05ffa1;
+            --bg: #0a0a0c;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
+        }
+
+        .heart-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; color: var(--primary); font-size: 2.5rem; }
+
+        .phase { display: none; animation: slideUp 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
+        .active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        #typewriter { font-size: 1.1rem; line-height: 1.6; min-height: 120px; }
+
+        .btn-group { margin-top: 30px; position: relative; height: 100px; }
+
+        button {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        #yesBtn {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.4);
+        }
+
+        #yesBtn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 42, 109, 0.6); }
+
+        #noBtn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            position: absolute;
+            white-space: nowrap;
+            transition: all 0.2s ease-out;
+        }
+
+        .next-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-top: 20px;
+        }
+
+        .success-icon { font-size: 5rem; margin-bottom: 20px; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heartBg"></div>
+
+    <div class="container">
+        <div id="phase1" class="phase active">
+            <h1>Hey Glorious... ✨</h1>
+            <div id="typewriter"></div>
+            <button class="next-btn" id="proceedBtn" style="display:none;">Keep reading... 📜</button>
+        </div>
+
+        <div id="phase2" class="phase">
+            <h1>The Big Question 💌</h1>
+            <p>I put a lot of pixels into this, so choose wisely...</p>
+            <p style="font-weight: 600; font-size: 1.2rem;">Glorious Ejobe, will you be my Valentine?</p>
+            
+            <div class="btn-group">
+                <button id="yesBtn">YES! 💖</button>
+                <button id="noBtn">No 😈</button>
+            </div>
+        </div>
+
+        <div id="phase3" class="phase">
+            <span class="success-icon">🥳</span>
+            <h1>LESGOOO! ❤️</h1>
+            <p>I already cleared my schedule. You're stuck with me now!</p>
+            <p style="color: var(--primary); font-size: 1.5rem;">See you soon, Glorious! 🌹</p>
+            <p style="margin-top:10px;">— From: <b>Essien David 💘</b></p>
+        </div>
+    </div>
+
+<script>
+const text = "I’ve been trying to find a cool way to tell you this...\n\nYou're easily the highlight of my day and honestly, the prettiest girl in my orbit. 🚀\n\nSo I coded this just to ask you one thing.";
+let i = 0;
+const speed = 40;
+
+function typeWriter() {
+    if (i < text.length) {
+        const char = text.charAt(i);
+        document.getElementById("typewriter").innerHTML += char === "\n" ? "<br>" : char;
+        i++;
+        setTimeout(typeWriter, speed);
+    } else {
+        document.getElementById("proceedBtn").style.display = "inline-block";
+    }
+}
+setTimeout(typeWriter, 500);
+
+document.getElementById("proceedBtn").addEventListener("click", () => {
+    document.getElementById("phase1").classList.remove("active");
+    document.getElementById("phase2").classList.add("active");
+});
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+let yesScale = 1;
+let noClicks = 0;
+
+const insults = [
+    "Oops 😂",
+    "Nice try 😂",
+    "Are you sure?",
+    "Think again, Gloria",
+    "Error: Button broken",
+    "Is that your final answer?",
+   "You're misclicking...",
+    "Give it up lol"];
+
+function moveNo() {
+    const x = Math.random() * (window.innerWidth - 200) - (window.innerWidth/2 - 100);
+    const y = Math.random() * (window.innerHeight - 200) - (window.innerHeight/2 - 100);
+    
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    
+    yesScale += 0.12;
+    yesBtn.style.transform = `scale(${yesScale})`;
+    
+    noBtn.innerText = insults[noClicks % insults.length];
+    noClicks++;
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNo(); });
+noBtn.addEventListener("touchstart", moveNo); // MOBILE SUPPORT
+
+yesBtn.addEventListener("click", () => {
+    document.getElementById("phase2").classList.remove("active");
+    document.getElementById("phase3").classList.add("active");
+    createConfetti();
+});
+
+function createHearts() {
+    const container = document.getElementById('heartBg');
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.opacity = '0.2';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animation = `float ${Math.random() * 5 + 5}s linear infinite`;
+        container.appendChild(heart);
+    }
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    50% { opacity: 0.3; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}`;
+document.head.appendChild(style);
+createHearts();
+
+function createConfetti() {
+    setInterval(createHearts, 400);
+}
+</script>
+
+</body>
+</html>
